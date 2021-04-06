@@ -130,7 +130,7 @@ void hpc_add_scaled_diff(Field& y, Field const& x, const double alpha,
 void hpc_scaled_diff(Field& y, const double alpha,
     Field const& l, Field const& r, const int N)
 {
-    #pragma omp parallel for schedule(static) default(none) shared(y l, r) firstprivate(alpha)
+    #pragma omp parallel for schedule(static) default(none) shared(y, l, r) firstprivate(alpha)
     for (int i = 0; i < N; i++)
     {
         y[i] = alpha*(l[i]-r[i]); 
