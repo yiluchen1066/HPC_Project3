@@ -62,7 +62,7 @@ void diffusion(const data::Field &s, data::Field &f)
     // the west boundary
     {
         int i = 0;
-        for (int j = 0; j < jend; j++)
+        for (int j = 1; j < jend; j++)
         {
             f(i,j) = -(4. +alpha)*s(i,j)
                         +s(i+1,j)+s(i,j-1)+s(i,j+1)
@@ -121,10 +121,10 @@ void diffusion(const data::Field &s, data::Field &f)
         {
             for (int i = 1; i < iend; i++)
             {
-                f(i,j) = -(4. +alpha) *s(i,j)
-                            +s(i-1,j) + s(i,j-1)
-                            +alpha * y_old(i,j) +bndS[i]
-                            +beta*s(i,j)*(1.0-s(i,j)); 
+                f(i,j) = -(4. +alpha) * s(i,j)
+                            +s(i-1,j) + s(i,j-1) + s(i,j+1)
+                            +alpha * y_old(i,j) + bndS[i]
+                            +beta * s(i,j) * (1.0 - s(i,j)); 
             }
             
         }
