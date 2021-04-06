@@ -178,6 +178,8 @@ int main(int argc, char* argv[])
             diffusion(y_new, b);
             residual = hpc_norm2(b,N); 
 
+            printf("%f", residual); 
+
             // check for convergence
             if (residual < tolerance)
             {
