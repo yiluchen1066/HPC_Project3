@@ -1,6 +1,6 @@
 # by default select gcc
 CXX=g++
-CXXFLAGS=-O3 -fopenmp
+CXXFLAGS=-Og -g -fopenmp
 
 # if on a cray system, set flags according to the compilation enviroment
 ifeq ($(PE_ENV),GNU)
