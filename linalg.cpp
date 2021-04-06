@@ -83,7 +83,7 @@ double hpc_norm2(Field const& x, const int N)
 //static 
 void hpc_fill(Field& x, const double value, const int N)
 {
-    #pragma omp parallel for schedule(static) shared (x, value)
+    #pragma omp parallel for schedule(static) default(none) shared (x) firstprivate(value)
     for (int i = 0; i < N; i++)
     {
         x[i]=value; 
@@ -100,7 +100,7 @@ void hpc_fill(Field& x, const double value, const int N)
 //
 void hpc_axpy(Field& y, const double alpha, Field const& x, const int N)
 {
-    #pragma omp parallel for schedule(static) shared (x,y, alpha)
+    #pragma omp parallel for schedule(static) default(none) shared (x,y) firstprivate(alpha)
     for (int i = 0; i < N; i++)
     {
         y[i]=y[i]+alpha*x[i]; 
@@ -115,7 +115,7 @@ void hpc_axpy(Field& y, const double alpha, Field const& x, const int N)
 void hpc_add_scaled_diff(Field& y, Field const& x, const double alpha,
     Field const& l, Field const& r, const int N)
 {
-    #pragma omp parallel for schedule(static) shared (x, y, alpha, l, r)
+    #pragma omp parallel for schedule(static) default(none) shared (x, y, l, r) firstprivate(alpha)
     for (int i = 0; i < N; i++)
     {
         y[i] = x[i] + alpha* (l[i]-r[i]); 
@@ -130,7 +130,7 @@ void hpc_add_scaled_diff(Field& y, Field const& x, const double alpha,
 void hpc_scaled_diff(Field& y, const double alpha,
     Field const& l, Field const& r, const int N)
 {
-    #pragma omp parallel for schedule(static) shared(y, alpha, l, r)
+    #pragma omp parallel for schedule(static) default(none) shared(y l, r) firstprivate(alpha)
     for (int i = 0; i < N; i++)
     {
         y[i] = alpha*(l[i]-r[i]); 
@@ -144,7 +144,7 @@ void hpc_scaled_diff(Field& y, const double alpha,
 //
 void hpc_scale(Field& y, const double alpha, Field& x, const int N)
 {
-    #pragma omp parallel for schedule(static) shared(x, y, alpha) 
+    #pragma omp parallel for schedule(static) default(none) shared(x, y) firstprivate(alpha) 
     for (int i = 0; i < N; i++)
     {
         y[i] = alpha*x[i];
@@ -159,7 +159,7 @@ void hpc_scale(Field& y, const double alpha, Field& x, const int N)
 void hpc_lcomb(Field& y, const double alpha, Field& x, const double beta,
     Field const& z, const int N)
 {
-    #pragma omp parallel for schedule(static) shared(x,y,z, alpha, beta)
+    #pragma omp parallel for schedule(static) default(none) shared(x,y,z) firstprivate(alpha, beta)
     for (int i = 0; i < N; i++)
     {
         y[i] = alpha*x[i]+beta*z[i]; 
@@ -172,7 +172,7 @@ void hpc_lcomb(Field& y, const double alpha, Field& x, const double beta,
 //
 void hpc_copy(Field& y, Field const& x, const int N)
 {
-    #pragma omp parallel for schedule(static) shared (x,y)
+    #pragma omp parallel for schedule(static) default(none) shared (x,y) 
     for (int i = 0; i < N; i++)
     {
         y[i] = x[i]; 
