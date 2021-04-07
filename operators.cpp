@@ -38,10 +38,10 @@ void diffusion(const data::Field &s, data::Field &f)
     // the interior grid points
     for (int j=1; j < jend; j++) {
         for (int i=1; i < iend; i++) {
-            f(i,j) = -(4. +alpha) * s(i,j)
+            f(i,j) = -(4.0 +alpha) * s(i,j)
                         +s(i-1,j)+s(i+1,j)+s(i,j-1)+s(i,j+1)
                         +alpha*y_old(i,j)
-                        +beta*s(i,j)*(1.-s(i,j)); 
+                        +beta*s(i,j)*(1.0-s(i,j)); 
             // f(i,j) = ...
 
         }
@@ -52,7 +52,7 @@ void diffusion(const data::Field &s, data::Field &f)
         int i = nx - 1;
         for (int j = 1; j < jend; j++)
         {
-            f(i,j) = -(4. + alpha) * s(i,j)
+            f(i,j) = -(4.0 + alpha) * s(i,j)
                         + s(i-1,j) + s(i,j-1) + s(i,j+1)
                         + alpha*y_old(i,j) + bndE[j]
                         + beta * s(i,j) * (1.0 - s(i,j));
@@ -64,10 +64,10 @@ void diffusion(const data::Field &s, data::Field &f)
         int i = 0;
         for (int j = 1; j < jend; j++)
         {
-            f(i,j) = -(4. +alpha)*s(i,j)
+            f(i,j) = -(4.0 +alpha)*s(i,j)
                         +s(i+1,j)+s(i,j-1)+s(i,j+1)
                         +alpha*y_old(i,j)+bndW[j]
-                        +beta*s(i,j)*(1. - s(i,j)); 
+                        +beta*s(i,j)*(1.0- s(i,j)); 
         }
         
     }
@@ -78,7 +78,7 @@ void diffusion(const data::Field &s, data::Field &f)
 
         {
             int i = 0; // NW corner
-            f(i,j) = -(4. + alpha) * s(i,j)
+            f(i,j) = -(4.0 + alpha) * s(i,j)
                         + s(i+1,j) + s(i,j-1)
                         + alpha * y_old(i,j) + bndW[j] + bndN[i]
                         + beta * s(i,j) * (1.0 - s(i,j));
@@ -88,7 +88,7 @@ void diffusion(const data::Field &s, data::Field &f)
         {
             for (int i = 1; i < iend; i++)
             {
-                f(i,j) = -(4. + alpha) *s(i,j) 
+                f(i,j) = -(4.0 + alpha) *s(i,j) 
                             +s(i-1,j)+s(i+1,j)+s(i,j-1)
                             +alpha * y_old(i,j) + bndN[i]
                             +beta*s(i,j)*(1.0 - s(i,j)); 
@@ -98,7 +98,7 @@ void diffusion(const data::Field &s, data::Field &f)
 
         {
             int i = nx-1; // NE corner
-            f(i,j) = -(4. + alpha) * s(i,j)
+            f(i,j) = -(4.0 + alpha) * s(i,j)
                         + s(i-1,j) + s(i,j-1)
                         + alpha * y_old(i,j) + bndE[j] + bndN[i]
                         + beta * s(i,j) * (1.0 - s(i,j));
@@ -111,7 +111,7 @@ void diffusion(const data::Field &s, data::Field &f)
 
         {
             int i = 0; // SW corner
-            f(i,j) = -(4. + alpha) * s(i,j)
+            f(i,j) = -(4.0 + alpha) * s(i,j)
                         + s(i+1,j) + s(i,j+1)
                         + alpha * y_old(i,j) + bndW[j] + bndS[i]
                         + beta * s(i,j) * (1.0 - s(i,j));
@@ -121,8 +121,8 @@ void diffusion(const data::Field &s, data::Field &f)
         {
             for (int i = 1; i < iend; i++)
             {
-                f(i,j) = -(4. +alpha) * s(i,j)
-                            +s(i-1,j) + s(i,j-1) + s(i,j+1)
+                f(i,j) = -(4.0 + alpha) * s(i,j)
+                            +s(i-1,j) + s(i+1,j) + s(i,j+1)
                             +alpha * y_old(i,j) + bndS[i]
                             +beta * s(i,j) * (1.0 - s(i,j)); 
             }
@@ -131,7 +131,7 @@ void diffusion(const data::Field &s, data::Field &f)
 
         {
             int i = nx - 1; // SE corner
-            f(i,j) = -(4. + alpha) * s(i,j)
+            f(i,j) = -(4.0 + alpha) * s(i,j)
                         + s(i-1,j) + s(i,j+1)
                         + alpha * y_old(i,j) + bndE[j] + bndS[i]
                         + beta * s(i,j) * (1.0 - s(i,j));
