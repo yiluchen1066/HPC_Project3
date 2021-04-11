@@ -198,7 +198,7 @@ void hpc_cg(Field& x, Field const& b, const int maxiters, const double tol, bool
         cg_init(nx);
 
     // epslion value use for matrix-vector approximation
-    double eps     = 1.e-8; //1.0e-7
+    double eps     = 1.e-7; //1.0e-7
     double eps_inv = 1. / eps;
 
     // allocate memory for temporary storage
