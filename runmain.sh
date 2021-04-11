@@ -2,11 +2,15 @@ export OMP_NUM_THREADS=1
 ./main 64 100 0.005
 
 export OMP_NUM_THREADS=4
-./main 128 100 0.005
+./main  128 100 0.005
 
 export OMP_NUM_THREADS=16
 ./main 256 100 0.005
 
 export OMP_NUM_THREADS=64
 ./main 512 100 0.005
+
+export OMP_NUM_THREADS=128
+./main 1024 100 0.005
+
 
